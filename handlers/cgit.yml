@@ -1,0 +1,2 @@
+- name: restart cgit
+  service: name=cgit state=restarted

@@ -1,0 +1,22 @@
+---
+- hosts: default
+  remote_user: root
+  become_method: su
+  vars:
+    live: True
+  tasks:
+  - include: tasks/apt.yml
+    tags: apt
+  - include: tasks/system.yml
+    tags: system
+  - include: tasks/nginx.yml
+    tags: nginx
+  - include: tasks/nginx-site.yml name={{inventory_hostname}} config_name=cgit
+    tags: [nginx, cgit]
+  - include: tasks/cgit.yml
+    tags: cgit
+  - include: tasks/gitolite.yml
+    tags: gitolite
+  handlers:
+  - include: handlers/nginx.yml
+  - include: handlers/cgit.yml

@@ -1,0 +1,15 @@
+- name: install gitolite3
+  apt: name={{item}} state=present
+  with_items:
+    - gitolite3
+- name: create git user
+  user: name=git home=/srv/git
+  register: git_user
+- name: copy gitolite public keys
+  copy: dest=/tmp/gitolite.pub src=/root/.ssh/authorized_keys remote_src=yes
+  when: git_user.changed
+- name: set up gitolite
+  command: gitolite setup -pk /tmp/gitolite.pub
+  become: true
+  become_user: git
+  when: git_user.changed

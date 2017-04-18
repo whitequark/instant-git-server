@@ -1,0 +1,5 @@
+Unattended-Upgrade::Origins-Pattern {
+  "o=Debian,a=stable";
+  "o=Debian,a=stable-updates";
+  "o=Debian,codename=${distro_codename},label=Debian-Security";
+};

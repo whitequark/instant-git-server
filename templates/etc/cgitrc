@@ -1,0 +1,25 @@
+virtual-root=/
+clone-url=https://$HTTP_HOST/$CGIT_REPO_URL ssh://git@$HTTP_HOST/$CGIT_REPO_URL
+
+snapshots=tar.bz2 zip
+enable-commit-graph=1
+enable-log-filecount=1
+enable-log-linecount=1
+
+source-filter=/usr/lib/cgit/filters/syntax-highlighting.py
+about-filter=/usr/lib/cgit/filters/about-formatting.sh
+
+mimetype.gif=image/gif
+mimetype.html=text/html
+mimetype.jpg=image/jpeg
+mimetype.jpeg=image/jpeg
+mimetype.pdf=application/pdf
+mimetype.png=image/png
+mimetype.svg=image/svg+xml
+
+readme=:README.md
+readme=:readme.md
+
+remove-suffix=1
+project-list=/srv/git/projects.list
+scan-path=/srv/git/repositories/

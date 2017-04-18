@@ -1,0 +1,18 @@
+- name: install fcgiwrap, spawn-fcgi, cgit
+  apt: name={{item}} state=present
+  with_items:
+    - spawn-fcgi
+    - fcgiwrap
+    - cgit
+- name: configure cgit
+  copy: dest=/etc/cgitrc src=templates/etc/cgitrc
+  notify:
+    - restart cgit
+- name: add cgit init script
+  copy: dest=/etc/init.d/cgit src=templates/etc/init.d/cgit mode=0755
+  notify:
+    - restart cgit
+- name: disable fcgiwrap service
+  service: name=fcgiwrap state=stopped enabled=no
+- name: enable cgit service
+  service: name=cgit enabled=yes
